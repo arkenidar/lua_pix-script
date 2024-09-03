@@ -1,0 +1,2 @@
+%cd%/executables/sdl
+pause
