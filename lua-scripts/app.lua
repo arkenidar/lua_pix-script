@@ -12,9 +12,20 @@ function DrawRectangle(x, y, w, h)
 end
 
 function Draw()
-  SetDrawColor(0xCC, 0xFF, 0x00)
-  DrawRectangle(20, 30, 31, 31)
+  -- draw a small Italian flag
 
-  SetDrawColor(0xCC, 0xFF, 0x00)
-  DrawRectangle(60, 30, 31, 31)
+  -- Green
+  SetDrawColor(0x00, 0xFF, 0x00)
+  DrawRectangle(20, 30, 30, 50)
+
+  -- White
+  SetDrawColor(0xFF, 0xFF, 0xFF)
+  DrawRectangle(50, 30, 30, 50)
+
+  -- Red
+  SetDrawColor(0xFF, 0x00, 0x00)
+  DrawRectangle(80, 30, 30, 50)
 end
+
+print("Hello, World!")
+print("Hello from Italy!")
