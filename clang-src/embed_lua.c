@@ -10,6 +10,9 @@
 #include <lauxlib.h>
 */
 
+// Include the SDL2 library
+#include <SDL2/SDL.h>
+
 /*
 int main()
 {
