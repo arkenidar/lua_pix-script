@@ -3,14 +3,6 @@ if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
   require("lldebugger").start()
 end
 
-function DrawRectangle(x, y, w, h)
-  for px = x, x + w - 1 do
-    for py = y, y + h - 1 do
-      DrawPoint(px, py)
-    end
-  end
-end
-
 function Draw()
   -- draw a small Italian flag
 
@@ -25,7 +17,26 @@ function Draw()
   -- Red
   SetDrawColor(0xFF, 0x00, 0x00)
   DrawRectangle(80, 30, 30, 50)
+
+  -- draw a circle
+  SetDrawColor(0x00, 0x00, 0xFF)
+  DrawCircle(160, 60, 30)
 end
 
-print("Hello, World!")
-print("Hello from Italy!")
+function DrawRectangle(x, y, w, h)
+  for px = x, x + w - 1 do
+    for py = y, y + h - 1 do
+      DrawPoint(px, py)
+    end
+  end
+end
+
+function DrawCircle(cx, cy, radius)
+  for px = cx - radius, cx + radius do
+    for py = cy - radius, cy + radius do
+      if (px - cx) * (px - cx) + (py - cy) * (py - cy) <= radius * radius then
+        DrawPoint(px, py)
+      end
+    end
+  end
+end
