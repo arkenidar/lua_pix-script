@@ -1,14 +1,16 @@
 
 // gcc clang-src/embed_lua.c -o program-bin/embedlua -lm
 
+/*
 #define LUA_IMPL
 #include "minilua.h"
+*/
 
-/*
+// /*
 #include <lua.h>
 #include <lualib.h>
 #include <lauxlib.h>
-*/
+// */
 
 // Include the SDL2 library
 #include <SDL2/SDL.h>

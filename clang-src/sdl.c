@@ -10,8 +10,16 @@
 
 // Include for Lua
 
-#define LUA_IMPL
-#include "minilua.h"
+// minilua
+// #define LUA_IMPL
+// #include "minilua.h"
+
+// lua or luajit
+// /*
+#include <lua.h>
+#include <lualib.h>
+#include <lauxlib.h>
+// */
 
 SDL_Renderer *renderer;
 
