@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global, lowercase-global
 function load_obj_file(file_path)
   local triangles = {}
   local lines_iterator

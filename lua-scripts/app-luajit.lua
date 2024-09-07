@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global, lowercase-global
 -- app.lua is for SDL2 ... (https://libsdl.org/)
 -- ... via LuaJIT's FFI (https://luajit.org/)
 

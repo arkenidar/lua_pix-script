@@ -5,6 +5,7 @@ end
 
 require("common")
 
+---@diagnostic disable-next-line: lowercase-global
 function draw_pixel(rgb, xy)
 	SetDrawColor(rgb[1]*255, rgb[2]*255, rgb[3]*255)
 

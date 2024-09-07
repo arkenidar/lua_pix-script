@@ -1,3 +1,4 @@
+---@diagnostic disable: lowercase-global
 --require("lldebugger").start()
 
 require('algebra')

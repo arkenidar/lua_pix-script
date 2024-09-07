@@ -1,3 +1,4 @@
+---@diagnostic disable: lowercase-global
 function clamp_generic(n, low, high) return math.min(math.max(n, low), high) end
 
 function unit_clamp(n) return clamp_generic(n, 0, 1) end

@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global, lowercase-global
 -- main.lua is for Love2D (https://love2d.org)
 
 -- Love2D: use "local-lua-debugger-vscode" only if launched through "ms-vscode"
