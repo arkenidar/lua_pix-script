@@ -51,14 +51,29 @@ int SetDrawColor(lua_State *L)
 
 int main(int argc, char *argv[])
 {
+    printf("Hello, SDL2!\n");
+    
+    // Initialize Lua
 
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
+    
+    //----------------------------------
 
-    if (luaL_dofile(L, "lua-scripts/app.lua") == LUA_OK)
+    // Load the script
+
+    printf(" ! Loading 'pix-let' application script ! ( 'pix-script' , Lua embedded variant ) ! \n");
+
+    if (luaL_dofile(L, "app-pixlet.lua") == LUA_OK)
     {
         lua_pop(L, lua_gettop(L));
     }
+    else
+    {
+        printf("luaL_dofile failed: %s\n", lua_tostring(L, -1));
+    }
+
+    //----------------------------------
 
     // Push the pointer to function
     lua_pushcfunction(L, DrawPoint);
@@ -66,6 +81,8 @@ int main(int argc, char *argv[])
     // Get the value on top of the stack
     // and set as a global, in this case is the function
     lua_setglobal(L, "DrawPoint");
+
+    //----------------------------------
 
     // Push the pointer to function
     lua_pushcfunction(L, SetDrawColor);

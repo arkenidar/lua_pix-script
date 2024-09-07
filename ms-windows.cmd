@@ -1,2 +1,3 @@
-%cd%/executables/sdl
+cd lua-scripts
+sdl
 pause

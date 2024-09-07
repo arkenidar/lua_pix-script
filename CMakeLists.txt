@@ -13,7 +13,8 @@ if (WIN32)
     include_directories( c:/MSYS64/home/dario/luajit/src )
 
     # variant: no console window on Windows (Wine also works)
-    target_link_options( sdl PRIVATE -mwindows ) # uncomment for Windows (MinGW)
+    # WARNING : when using this will not PRINT to stdout console !!! not good if debugging !
+    #### target_link_options( sdl PRIVATE -mwindows ) # uncomment for Windows (MinGW)
 
     target_link_libraries( sdl ${SDL2_LIBRARIES} m luajit-5.1.dll )
     target_link_libraries( embed_lua ${SDL2_LIBRARIES} m luajit-5.1.dll )
