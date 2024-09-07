@@ -12,6 +12,18 @@
             ],
             "cwd": "${workspaceFolder}/lua-scripts",
             "stopOnEntry": false
+        },
+        {
+            "name": "executables -- pix-script (debug also)",
+            "request": "launch",
+            "type": "lua-local",
+            "program": {
+                "command": "${workspaceFolder}/build/sdl"
+            },
+            "args": [
+            ],
+            "cwd": "${workspaceFolder}/executables",
+            "stopOnEntry": false
         }
     ]
 }
