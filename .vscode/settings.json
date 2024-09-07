@@ -1,6 +1,7 @@
 {
     "Lua.diagnostics.globals": [
         "DrawPoint",
-        "SetDrawColor"
+        "SetDrawColor",
+        "GetTicks"
     ]
 }

@@ -3,6 +3,7 @@ if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
   require("lldebugger").start()
 end
 
+local position = { x = 0, y = 60 }
 function Draw()
   -- draw a small Italian flag
 
@@ -29,7 +30,11 @@ function Draw()
 
   -- draw a second circle with a solid pattern
   -- same color as the first circle
-  DrawCircle(160 + 80, 60, 30)
+  position.y = position.y + 40 * DeltaTime()
+  if position.y > 150 then
+    position.y = 60
+  end
+  DrawCircle(160 + 80, position.y, 30)
 end
 
 function DrawRectangle(x, y, w, h)
@@ -68,4 +73,13 @@ end
 
 function DrawCircle(cx, cy, radius)
   DrawCircleEffect(cx, cy, radius, function(px, py) return true end)
+end
+
+local time_ticks = GetTicks()
+function DeltaTime()
+  local dt -- elapsed time in fractions of seconds
+  local delta_ticks = GetTicks() - time_ticks
+  time_ticks = GetTicks()
+  dt = delta_ticks / 1000 -- milliseconds to seconds
+  return dt
 end

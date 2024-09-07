@@ -49,30 +49,24 @@ int SetDrawColor(lua_State *L)
     return 0;
 }
 
+int GetTicks(lua_State *L)
+{
+    lua_Integer ticks = SDL_GetTicks64();
+    lua_pushinteger(L, ticks);
+    return 1;
+}
+
 int main(int argc, char *argv[])
 {
     printf("Hello, SDL2!\n");
-    
+
     // Initialize Lua
 
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
-    
+
     //----------------------------------
-
-    // Load the script
-
-    printf(" ! Loading 'pix-let' application script ! ( 'pix-script' , Lua embedded variant ) ! \n");
-
-    if (luaL_dofile(L, "app-pixlet.lua") == LUA_OK)
-    {
-        lua_pop(L, lua_gettop(L));
-    }
-    else
-    {
-        printf("luaL_dofile failed: %s\n", lua_tostring(L, -1));
-    }
-
+    // bind functions to Lua
     //----------------------------------
 
     // Push the pointer to function
@@ -90,6 +84,30 @@ int main(int argc, char *argv[])
     // Get the value on top of the stack
     // and set as a global, in this case is the function
     lua_setglobal(L, "SetDrawColor");
+
+    //----------------------------------
+
+    // Push the pointer to function
+    lua_pushcfunction(L, GetTicks);
+
+    // Get the value on top of the stack
+    // and set as a global, in this case is the function
+    lua_setglobal(L, "GetTicks");
+
+    //----------------------------------
+
+    // Load the script
+
+    printf(" ! Loading 'pix-let' application script ! ( 'pix-script' , Lua embedded variant ) ! \n");
+
+    if (luaL_dofile(L, "app-pixlet.lua") == LUA_OK)
+    {
+        lua_pop(L, lua_gettop(L));
+    }
+    else
+    {
+        printf("luaL_dofile failed: %s\n", lua_tostring(L, -1));
+    }
 
     //----------------------------------
 
