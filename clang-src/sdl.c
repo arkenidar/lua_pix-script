@@ -104,10 +104,10 @@ int main(int argc, char *argv[])
     }
 
     // Create a window
-    SDL_Window *window = SDL_CreateWindow("SDL2 Window -- Rectangles",
+    SDL_Window *window = SDL_CreateWindow("Pixlet app. (Lua+SDL)",
                                           SDL_WINDOWPOS_UNDEFINED,
                                           SDL_WINDOWPOS_UNDEFINED,
-                                          640, 480,
+                                          300, 300,
                                           SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
     if (window == NULL)
     {
