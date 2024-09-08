@@ -8,8 +8,7 @@
             "program": {
                 "command": "${workspaceFolder}/build/sdl"
             },
-            "args": [
-            ],
+            "args": [],
             "cwd": "${workspaceFolder}/lua-scripts",
             "stopOnEntry": false
         },
@@ -20,7 +19,19 @@
             "program": {
                 "command": "${workspaceFolder}/build/sdl"
             },
+            "args": [],
+            "cwd": "${workspaceFolder}/executables",
+            "stopOnEntry": false
+        },
+        {
+            "name": "[wine] executables -- pix-script (debug also)",
+            "request": "launch",
+            "type": "lua-local",
+            "program": {
+                "command": "wine"
+            },
             "args": [
+                "${workspaceFolder}/executables/sdl.exe"
             ],
             "cwd": "${workspaceFolder}/executables",
             "stopOnEntry": false

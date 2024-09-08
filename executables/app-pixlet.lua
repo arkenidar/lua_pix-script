@@ -83,3 +83,5 @@ function DeltaTime()
   dt = delta_ticks / 1000 -- milliseconds to seconds
   return dt
 end
+
+print("pixlet parsed") -- test for breakpoint (for vscode debugging)
