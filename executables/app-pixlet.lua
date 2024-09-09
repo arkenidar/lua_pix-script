@@ -3,8 +3,40 @@ if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
   require("lldebugger").start()
 end
 
-local position = { x = 0, y = 60 }
+-- This is a simple example of a Pixlet application.
+-- It draws a small Italian flag and two circles.
+-- The first circle has a checkerboard pattern.
+-- The first circle moves to the position of the mouse click.
+-- The second circle has a solid color.
+-- The second circle moves up and down.
+
+local pointer = {}
+function pointer.input()
+  local mx, my, down = InputPoint()
+  -- position, x, y
+  pointer.position = { mx, my }
+  pointer.x = pointer.position[1]
+  pointer.y = pointer.position[2]
+  -- click and down
+  pointer.down_previously = pointer.down
+  pointer.down = down
+  pointer.click = false
+  if pointer.down and not pointer.down_previously then
+    pointer.click = true
+  end
+end
+
+local circle1 = { x = 160, y = 60 }
+local circle2 = { x = 160 + 80, y = 60 }
 function Draw()
+  -- process input
+  pointer.input()
+  if pointer.click then
+    print("click at", pointer.x, pointer.y)
+    circle1.x = pointer.x
+    circle1.y = pointer.y
+  end
+
   -- draw a small Italian flag
 
   function DrawFlagPart(x, y, w, h)
@@ -26,25 +58,24 @@ function Draw()
 
   -- draw a first circle with a checkerboard pattern
   SetDrawColor(0x00, 0x00, 0xFF)
-  DrawCircleEffect(160, 60, 30, function(px, py) return CheckerBoardPattern(px, py, 10) end)
+  DrawCircleEffect(circle1.x, circle1.y, 30, function(px, py) return CheckerBoardPattern(px, py, 10) end)
 
   -- draw a second circle with a solid pattern
   -- same color as the first circle
-  position.y = position.y + 40 * DeltaTime()
-  if position.y > 150 then
-    position.y = 60
+  circle2.y = circle2.y + 40 * DeltaTime()
+  if circle2.y > 150 then
+    circle2.y = 60
   end
-  DrawCircle(160 + 80, position.y, 30)
+  DrawCircle(circle2.x, circle2.y, 30)
 
   -- InputPoint() tests
   -- draw a rectangle for mouse position
   SetDrawColor(0xFF, 0xFF, 0x00)
-  local ix, iy, primaryButtonPressed = InputPoint()
   local w, h = 30, 30
-  if primaryButtonPressed then
+  if pointer.down then
     SetDrawColor(0xFF, 0x00, 0x00)
+    DrawRectangle(pointer.x - w / 2, pointer.y - h / 2, w, h)
   end
-  DrawRectangle(ix - w / 2, iy - h / 2, w, h)
 end
 
 function DrawRectangle(x, y, w, h)
