@@ -56,6 +56,17 @@ int GetTicks(lua_State *L)
     return 1;
 }
 
+int InputPoint(lua_State *L)
+{
+    int ix, iy; // mouse position point
+    Uint32 mouseButtonState = SDL_GetMouseState(&ix, &iy);
+    int primaryButtonPressed = mouseButtonState & SDL_BUTTON(SDL_BUTTON_LEFT) ? 1 : 0;
+    lua_pushinteger(L, ix);
+    lua_pushinteger(L, iy);
+    lua_pushboolean(L, primaryButtonPressed);
+    return 3;
+}
+
 int main(int argc, char *argv[])
 {
     printf("Hello, SDL2!\n");
@@ -93,6 +104,15 @@ int main(int argc, char *argv[])
     // Get the value on top of the stack
     // and set as a global, in this case is the function
     lua_setglobal(L, "GetTicks");
+
+    //----------------------------------
+
+    // Push the pointer to function
+    lua_pushcfunction(L, InputPoint);
+
+    // Get the value on top of the stack
+    // and set as a global, in this case is the function
+    lua_setglobal(L, "InputPoint");
 
     //----------------------------------
 

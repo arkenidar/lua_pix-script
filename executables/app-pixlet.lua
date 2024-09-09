@@ -35,6 +35,16 @@ function Draw()
     position.y = 60
   end
   DrawCircle(160 + 80, position.y, 30)
+
+  -- InputPoint() tests
+  -- draw a rectangle for mouse position
+  SetDrawColor(0xFF, 0xFF, 0x00)
+  local ix, iy, primaryButtonPressed = InputPoint()
+  local w, h = 30, 30
+  if primaryButtonPressed then
+    SetDrawColor(0xFF, 0x00, 0x00)
+  end
+  DrawRectangle(ix - w / 2, iy - h / 2, w, h)
 end
 
 function DrawRectangle(x, y, w, h)
