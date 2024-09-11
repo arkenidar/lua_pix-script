@@ -10,6 +10,7 @@ end
 -- The second circle has a solid color.
 -- The second circle moves up and down.
 
+---@diagnostic disable-next-line: deprecated
 local spread = unpack and unpack or table.unpack
 
 local pointer = {}
@@ -30,6 +31,8 @@ end
 
 local circle1 = { x = 160, y = 60 }
 local circle2 = { x = 160 + 80, y = 60 }
+-- example of " basic scene-graph " concept , applied . from immediate mode to retained mode of rendering . of course HTML DOM hierarchy ( "tree" structure ) is a kind of " tree-based scene-graph " applied to its domain . at the moment of writing no hierarchies are involved yet rendering is " retained " , currently only in "rectangles" data table that works as a list .
+local rectangles = {}
 function Draw()
   -- process input
   pointer.input()
@@ -82,6 +85,24 @@ function Draw()
   if pointer.down then
     SetDrawColor(spread(red))
     DrawRectangle(pointer.x - w / 2, pointer.y - h / 2, w, h)
+  end
+
+  -- draw a rectangle for mouse click
+  -- example of " basic scene-graph " concept , applied . from immediate mode to retained mode of rendering . of course HTML DOM hierarchy ( "tree" structure ) is a kind of " tree-based scene-graph " applied to its domain . at the moment of writing no hierarchies are involved yet rendering is " retained " , currently only in "rectangles" data table that works as a list .
+  if pointer.click then
+    --SetDrawColor(spread(green))
+    --DrawRectangle(pointer.x - w / 2, pointer.y - h / 2, w, h)
+
+    -- add a rectangle to the list
+    local rectangle = { x = pointer.x - w / 2, y = pointer.y - h / 2, w = w, h = h, color = green }
+    table.insert(rectangles, rectangle)
+  end
+
+  -- draw rectangles from list
+  -- example of " basic scene-graph " concept , applied . from immediate mode to retained mode of rendering . of course HTML DOM hierarchy ( "tree" structure ) is a kind of " tree-based scene-graph " applied to its domain . at the moment of writing no hierarchies are involved yet rendering is " retained " , currently only in "rectangles" data table that works as a list .
+  for i, r in ipairs(rectangles) do
+    SetDrawColor(spread(r.color))
+    DrawRectangle(r.x, r.y, r.w, r.h)
   end
 end
 
