@@ -33,14 +33,30 @@ local circle1 = { x = 160, y = 60 }
 local circle2 = { x = 160 + 80, y = 60 }
 -- example of " basic scene-graph " concept , applied . from immediate mode to retained mode of rendering . of course HTML DOM hierarchy ( "tree" structure ) is a kind of " tree-based scene-graph " applied to its domain . at the moment of writing no hierarchies are involved yet rendering is " retained " , currently only in "rectangles" data table that works as a list .
 local rectangles = {}
+local viewport_translate = { x = 0, y = 0 }
+local initial_click_point = nil
 function Draw()
   -- process input
   pointer.input()
   if pointer.click then
-    print("click at", pointer.x, pointer.y)
+    --print("click at", pointer.x, pointer.y)
     circle1.x = pointer.x
     circle1.y = pointer.y
+    initial_click_point = { pointer.x, pointer.y }
   end
+
+  if pointer.down and initial_click_point then
+    --print("dragging at", pointer.x, pointer.y)
+    local dx = pointer.x - initial_click_point[1]
+    local dy = pointer.y - initial_click_point[2]
+    viewport_translate.x = dx
+    viewport_translate.y = dy
+  end
+  if not pointer.down then
+    initial_click_point = nil
+  end
+
+  -- clear screen
 
   -- draw a small Italian flag
 
@@ -102,7 +118,7 @@ function Draw()
   -- example of " basic scene-graph " concept , applied . from immediate mode to retained mode of rendering . of course HTML DOM hierarchy ( "tree" structure ) is a kind of " tree-based scene-graph " applied to its domain . at the moment of writing no hierarchies are involved yet rendering is " retained " , currently only in "rectangles" data table that works as a list .
   for i, r in ipairs(rectangles) do
     SetDrawColor(spread(r.color))
-    DrawRectangle(r.x, r.y, r.w, r.h)
+    DrawRectangle(r.x + viewport_translate.x, r.y + viewport_translate.y, r.w, r.h)
   end
 end
 
