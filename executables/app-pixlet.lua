@@ -10,6 +10,8 @@ end
 -- The second circle has a solid color.
 -- The second circle moves up and down.
 
+local spread = unpack and unpack or table.unpack
+
 local pointer = {}
 function pointer.input()
   local mx, my, down = InputPoint()
@@ -45,19 +47,23 @@ function Draw()
   end
 
   -- Green
-  SetDrawColor(0x00, 0xFF, 0x00)
+  local green = { 0x00, 0xFF, 0x00 }
+  SetDrawColor(spread(green))
   DrawFlagPart(20, 30, 30, 50)
 
   -- White
-  SetDrawColor(0xFF, 0xFF, 0xFF)
+  local white = { 0xFF, 0xFF, 0xFF }
+  SetDrawColor(spread(white))
   DrawFlagPart(50, 30, 30, 50)
 
   -- Red
-  SetDrawColor(0xFF, 0x00, 0x00)
+  local red = { 0xFF, 0x00, 0x00 }
+  SetDrawColor(spread(red))
   DrawFlagPart(80, 30, 30, 50)
 
   -- draw a first circle with a checkerboard pattern
-  SetDrawColor(0x00, 0x00, 0xFF)
+  local blue = { 0x00, 0x00, 0xFF }
+  SetDrawColor(spread(blue))
   DrawCircleEffect(circle1.x, circle1.y, 30, function(px, py) return CheckerBoardPattern(px, py, 10) end)
 
   -- draw a second circle with a solid pattern
@@ -70,10 +76,11 @@ function Draw()
 
   -- InputPoint() tests
   -- draw a rectangle for mouse position
-  SetDrawColor(0xFF, 0xFF, 0x00)
+  local yellow = { 0xFF, 0xFF, 0x00 }
+  SetDrawColor(spread(yellow))
   local w, h = 30, 30
   if pointer.down then
-    SetDrawColor(0xFF, 0x00, 0x00)
+    SetDrawColor(spread(red))
     DrawRectangle(pointer.x - w / 2, pointer.y - h / 2, w, h)
   end
 end
